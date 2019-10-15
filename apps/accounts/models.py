@@ -454,7 +454,8 @@ class UserProfile(models.Model):
 
     @property
     def name(self):
-        name = '%s %s' % (self.user.first_name, self.user.last_name)
+        name = ' '.join(
+            n for n in [self.user.first_name, self.middle_name, self.user.last_name] if n)
         return name
 
     @property
