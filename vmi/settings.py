@@ -251,6 +251,7 @@ OIDC_PROVIDER = {
         'apps.accounts.claims.OrganizationAgentClaimProvider',
         'apps.accounts.claims.MembershipClaimProvider',
         'apps.accounts.claims.VerifiedPersonDataClaimProvider',
+        'apps.accounts.claims.ContactsClaimProvider',
         # 'apps.accounts.claims.SubjectClaimProvider',
         # 'apps.accounts.claims.EmailVerifiedClaimProvider',
         # 'apps.accounts.claims.PhoneNumberClaimProvider',

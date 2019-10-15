@@ -1,3 +1,4 @@
+from django.forms.models import model_to_dict
 from apps.oidc.claims import BaseProvider
 
 
@@ -45,6 +46,22 @@ class VerifiedPersonDataClaimProvider(BaseProvider):
         except Exception as e:
             print(e)
             return None
+
+
+class ContactsClaimProvider(BaseProvider):
+    
+    def claim_contacts(self):
+        try:
+            contacts = [
+                {
+                    **model_to_dict(contact),
+                    **{'address': model_to_dict(contact.address)},
+                }
+                for contact in self.user.contacts.select_related('address').all()
+            ]
+            return contacts
+        except Exception:
+            return []
 
 
 class UserProfileClaimProvider(BaseProvider):

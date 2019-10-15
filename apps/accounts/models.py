@@ -315,6 +315,20 @@ class OrganizationAffiliationRequest(models.Model):
             super(OrganizationAffiliationRequest, self).save(**kwargs)
 
 
+class Contact(models.Model):
+    """A contact for a user. (Contacts are not modeled as Users.)"""
+    user = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE, related_name='contacts')
+    name = models.CharField(max_length=255)
+    phone = PhoneNumberField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    address = models.ForeignKey(
+        Address, null=True, on_delete=models.CASCADE, related_name='+')
+
+    def __str__(self):
+        return "%s: contact for %r" % (self.name, self.user)
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE,
                                 db_index=True, null=False)
